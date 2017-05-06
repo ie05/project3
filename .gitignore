@@ -1,0 +1,10 @@
+# Excel files
+*.xlsx
+# zipped folders
+*.zip
+hidden
+projects
+node_modules
+startup-commands
+_express
+ideas
