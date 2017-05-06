@@ -1,0 +1,93 @@
+mongod --dbpath C:/Users/IEHandshy/yourwebproject1/data/db
+mongod --auth --dbpath C:/Users/IEHandshy/yourwebproject1/data/db
+
+use admin
+
+db.createUser(
+	{
+	user: "iehandshy",
+	pwd: "Hotstuff1",
+	roles: [ { role:"userAdminAnyDatabase", db: "admin" } ]
+	}
+)
+
+db.updateUser("iehandshy", {pwd: "Hotstuff1"})
+
+mongo --port 27017 -u "iehandshy" -p "Hotstuff1" --authenticationDatabase "admin"
+
+db.flowers.insertOne({"name":"Rose", "color":"pink"})
+db.flowers.insertOne({"name":"Bluebell", "color":"blue"})
+db.flowers.insertOne({"name":"Daisy", "color":"white"})
+db.flowers.insertOne({"name":"Sunflower", "color":"yellow"})
+db.flowers.insertOne({"name":"Tulip", "color":"red"})
+db.flowers.insertOne({"name":"Sakura", "color":"pink"})
+
+db.flowers.insertOne({"name":"Rose", "color":"pink", "wiki":"https://en.wikipedia.org/wiki/Rose", "image":"rose.jpg"})
+
+db.flowers.insertMany([
+{
+	"name":"Rose",
+	"color":"pink",
+	"wiki":"https://en.wikipedia.org/wiki/Rose",
+	"image":"rose.jpg"
+},
+{
+	"name":"Bluebell",
+	"color":"blue",
+	"wiki":"https://en.wikipedia.org/wiki/Hyacinthoides",
+	"image":"bluebell.jpg"
+},
+{
+	"name":"Daisy",
+	"color":"white",
+	"wiki":"https://en.wikipedia.org/wiki/Bellis_perennis",
+	"image":"daisy.jpg"
+},
+{
+	"name":"Sunflower",
+	"color":"yellow",
+	"wiki":"https://en.wikipedia.org/wiki/Helianthus",
+	"image":"sunflower.jpg"
+},
+{
+	"name":"Tulip",
+	"color":"red",
+	"wiki":"https://en.wikipedia.org/wiki/Tulip",
+	"image":"tulip.jpg"
+},
+{
+	"name":"Sakura",
+	"color":"pink",
+	"wiki":"https://en.wikipedia.org/wiki/Cherry_blossom",
+	"image":"sakura.jpg"
+}])
+
+
+db.createUser({ user: "myUserAdmin", pwd: "abc123", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]})
+
+use garden
+db.createUser(
+  {
+    user: "gardener",
+    pwd: "xyz123",
+    roles: [ { role: "readWrite", db: "garden" } ]
+  }
+)
+
+mongod --auth --dbpath C:/Users/IEHandshy/yourwebproject1/data/db
+
+mongo --port 27017 -u "myUserAdmin" -p "abc123" --authenticationDatabase admin
+mongo --port 27017 -u "gardener" -p "xyz123" --authenticationDatabase garden
+var mongo_pw = process.env.MONGO_PW;
+var url = 'mongodb://admin:' + mongo_pw + '@localhost:27017/garden?authSource=admin';
+MongoClient.connect(url , function(err, db) {
+assert.equal(null, err);
+console.log('connected to MongoDB');
+// TODO Rest of app setup code, will go here
+// TODO make db available to routes
+});
+
+db.flowers.insertOne({"name":"Dandelion", "color":"yellow", "wiki":"https://en.wikipedia.org/wiki/Taraxacum"})
+
+set MONGO_PW=xyz123
+export MONGO_PW=xyz123
