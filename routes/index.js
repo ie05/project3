@@ -49,33 +49,10 @@ router.post('/delete', function(req, res, next) {
 		        return next(err);
 		   	}
 		   	if (data) {
-		   		T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
-				      if (err) {
-				          return next(err);
-				      }
-				      
-				      if (data) {
-				    	 var statuses = [];
-				         // console.log(data[0].text);
-				         for (var i = 0; i < data.length; i++) {
-				               var text = data[i].text.replace('You know what ol\' Jack Burton always says? ','');
-				               statuses.push(
-				               	{id: data[i].id_str , text: text}
-				               );
-				           }
-				      	 // var json = JSON.stringify(statuses);
-					  	 console.log('statuses is ' + JSON.stringify(statuses));
-					  	 res.status(202);
-					  	 res.json(statuses);
-				      }else{
-				      	return res.redirect('/');
-				      }
 
-					});
-		   		// console.log('req.body.id is ' + req.body.id);
-		   	}else{
-		  		return res.redirect('/');
+		   		console.log('req.body.id is ' + req.body.id);
 		   	}
+		  	return res.redirect('/');
 	   }); // T.post
 
 }); // end post
