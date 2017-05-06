@@ -13,6 +13,8 @@
     "express-flash": "0.0.2",
     "express-handlebars": "~3.0.0",
     "express-session": "^1.15.1",
+    "handlebars-paginate": "^0.1.0",
+    "hbs": "~3.0.0",
     "moment": "^2.18.1",
     "mongoose": "^4.8.6",
     "mongoose-unique-validator": "^1.0.4",
@@ -20,7 +22,6 @@
     "node-twitterbot": "^0.2.2",
     "nodemon": "^1.11.0",
     "serve-favicon": "~2.3.2",
-    "twit": "^2.2.5",
-    "hbs": "~3.0.0"
+    "twit": "^2.2.5"
   }
 }

@@ -12,7 +12,26 @@
 	</div>
 
 	<h5>View All Tweets</h5>
-	<div class="tweet-stream">
+	<div>
+		<ul class="statuses">
+		{{# each statuses}}
+			<li>{{this.text}}
+			<form style="display:inline;" action="/delete" method="POST">
+	          <input name="id" type="hidden" value="{{this.id}}">
+	          <input class="delete" name="delete" type="submit" value="Delete">
+	        </form>
+			</li>
+		{{/each}}
+		</ul>
+		<script id="status-template" type="text/javascript">
+		  <li>{{this.text}}
+			<form style="display:inline;" action="/delete" method="POST">
+	          <input name="id" type="hidden" value="{{this.id}}">
+	          <input class="delete" name="delete" type="submit" value="Delete">
+	        </form>
+		  </li>
+		</script>
+
 		
 	</div>
 

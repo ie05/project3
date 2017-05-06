@@ -71,3 +71,18 @@ section{
 	width: 100%;
     max-width: 40%;
 }
+.statuses{
+  font-size: small;
+}
+.statuses > li{
+  margin-bottom:5px;
+}
+.delete{
+  border-radius: 3px;
+  border-style: none;
+  border: 1px solid #b5b5b5;
+}
+.delete:hover{
+  border: 1px solid white;
+  background-color: white;
+}
