@@ -8,7 +8,7 @@ html{
   font-family: 'Roboto','Lucida Grande', Helvetica, Arial, sans-serif;
 }
 body {
-	padding: 50px;
+	padding: 15px;
 	font-size: 14px;
 	background: rgba(255,255,255,0.9);
 	height: auto;
@@ -49,6 +49,20 @@ h5{
 section{
 	margin: 2% 0 1% 0;
 }
+label{
+  font-weight: normal;
+}
+input{
+  border-radius: 3px;
+  border-style: none;
+  border: 1px solid #afafaf;
+  background-color: #F5F5F5;
+  padding: 3px;
+
+}
+input:focus{
+  background-color: #FFFFFF;
+}
 .profile{
     background: url(/images/jacks-profile.jpg);
     background-size: cover;
@@ -71,18 +85,24 @@ section{
 	width: 100%;
     max-width: 40%;
 }
-.statuses{
+.statuses,.add{
   font-size: small;
 }
 .statuses > li{
   margin-bottom:5px;
 }
-.delete{
+.delete,.add{
   border-radius: 3px;
   border-style: none;
   border: 1px solid #b5b5b5;
+  margin-left: 5px;
 }
 .delete:hover{
   border: 1px solid white;
   background-color: white;
+}
+.val-error{
+  color: red;
+  font-size: small;
+  font-style: italic;
 }

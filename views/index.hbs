@@ -11,30 +11,29 @@
 		<a class="twitter-timeline" href="https://twitter.com/JackRoboBurton/likes">Tweets Liked by @JackRoboBurton</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 	</div>
 
-	<h5>View All Tweets</h5>
-	<div>
-		<ul class="statuses">
-		{{# each statuses}}
-			<li>{{this.text}}
-			<form style="display:inline;" action="/delete" method="POST">
-	          <input name="id" type="hidden" value="{{this.id}}">
-	          <input class="delete" name="delete" type="submit" value="Delete">
+	<h5>Admin</h5>
+	<div id="accordion2">
+		<h5>Delete</h5>
+		<div>
+			<ul class="statuses">
+			{{# each statuses}}
+				<li id="{{this.id}}"><label>{{this.text}}</label>
+					<form style="display:inline;">
+			          <button class="delete" name="id" type="submit" value="{{this.id}}">Delete</button>
+			        </form>
+				</li>
+			{{/each}}
+			</ul>
+		</div>
+		<h5>Create</h5>
+		<div class="add">
+			<form style="display:inline;">
+			  <label>Write Tweet</label><br>
+			  <input type="text" name="tweet" value="" />
+	          <button id="add" class="add" type="submit" value="tweet">Tweet</button>
 	        </form>
-			</li>
-		{{/each}}
-		</ul>
-		<script id="status-template" type="text/javascript">
-		  <li>{{this.text}}
-			<form style="display:inline;" action="/delete" method="POST">
-	          <input name="id" type="hidden" value="{{this.id}}">
-	          <input class="delete" name="delete" type="submit" value="Delete">
-	        </form>
-		  </li>
-		</script>
-
-		
+		</div>
 	</div>
-
 
 </div>
 <div style="width:900px;">
