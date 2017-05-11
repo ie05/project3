@@ -8,46 +8,46 @@ html{
   font-family: 'Roboto','Lucida Grande', Helvetica, Arial, sans-serif;
 }
 body {
-	padding: 15px;
-	font-size: 14px;
-	background: rgba(255,255,255,0.9);
-	height: auto;
-	min-height: 100%;
+  padding: 15px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.9);
+  height: auto;
+  min-height: 100%;
 }
 hr{
-  	border-top: 1px solid #bbbbbb;
+    border-top: 1px solid #bbbbbb;
 }
 
 a {
-  	color: #00B7FF;
+    color: #00B7FF;
 }
 nav > ul{
-	padding: 0;
+  padding: 0;
     list-style: none;
 }
 nav > ul li{
-	display: inline;
-	font-size: 1.5em;
+  display: inline;
+  font-size: 1.5em;
 }
 nav > ul li:after{
-	content: ' |';
+  content: ' |';
 }
 nav > ul li a{
-	font-weight: bold;
-	color:#555555;
+  font-weight: bold;
+  color:#555555;
 }
 nav > ul li a:hover{
-	text-decoration: none;
-	color:#9E9E9E;
+  text-decoration: none;
+  color:#9E9E9E;
 }
 nav > ul li a:active{
-	color:#fff;
+  color:#fff;
 }
 h5{
-	font-size: .75em;
+  font-size: .75em;
 }
 section{
-	margin: 2% 0 1% 0;
+  margin: 2% 0 1% 0;
 }
 label{
   font-weight: normal;
@@ -63,6 +63,9 @@ input{
 input:focus{
   background-color: #FFFFFF;
 }
+h2{
+  line-height: 100%;
+}
 .profile{
     background: url(/images/jacks-profile.jpg);
     background-size: cover;
@@ -74,7 +77,7 @@ input:focus{
 }
 .small-profile{
   background: url(/images/jacks-profile2.jpg);
-	display: inline-block;
+  display: inline-block;
   width: 75px;
   height: 75px;
   vertical-align: middle;
@@ -82,7 +85,7 @@ input:focus{
   background-position: top center;
 }
 .tweet-stream{
-	width: 100%;
+  width: 100%;
     max-width: 40%;
 }
 .statuses,.add{
@@ -91,11 +94,11 @@ input:focus{
 .statuses > li{
   margin-bottom:5px;
 }
-.delete,.add{
+.delete,.add,button{
   border-radius: 3px;
   border-style: none;
   border: 1px solid #b5b5b5;
-  margin-left: 5px;
+  margin: 5px;
 }
 .delete:hover{
   border: 1px solid white;
