@@ -4,6 +4,7 @@ var Twit = require('twit');
 var paginate = require('handlebars-paginate');
 var TwitterBot = require('node-twitterbot').TwitterBot;
 var removeRegexChars = require('../helpers/regex');
+var passport = require('passport');
 var botCreds = {
  consumer_key: '2ep9JxmzJZWRFsHBMEUjhcR0m',
  consumer_secret: '8SiofFEtnWsA7LStjCbXV7xsJh2wXGCr3yqCXR0dTqY3ejTbpw',
@@ -14,31 +15,33 @@ var botCreds = {
 var T = new Twit(botCreds);
 var user_id = '851970802543144961';
 
-router.get('/', function(req, res, next) {
+router.get('/', isLoggedIn, function(req, res, next) {
 	// TODO: Ask Laura about pagination, how can I emplement this?
 	// Jack user id 851970802543144961
-	T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
-      if (err) {
-          return next(err);
-      }
+	// T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
+ //      if (err) {
+ //          return next(err);
+ //      }
       
-      if (data) {
-    	 var statuses = [];
-         // console.log(data[0].text);
-         for (var i = 0; i < data.length; i++) {
-               var text = data[i].text.replace('You know what ol\' Jack Burton always says? ','');
-               statuses.push(
-               	{id: data[i].id_str , text: text}
-               );
-           }
+ //      if (data) {
+ //    	 var statuses = [];
+ //         // console.log(data[0].text);
+ //         for (var i = 0; i < data.length; i++) {
+ //               var text = data[i].text.replace('You know what ol\' Jack Burton always says? ','');
+ //               statuses.push(
+ //               	{id: data[i].id_str , text: text}
+ //               );
+ //           }
       
-      	 // var json = JSON.stringify(statuses);
-	  	 res.render('index', { title: 'Jack Robo Burton', description: 'You know what ol\' Jack Burton always says at a time like this?', statuses: statuses});
-      }else{
-      	return res.redirect('/');
-      }
+ //      	 // var json = JSON.stringify(statuses);
+	//   	 res.render('index', { title: 'Jack Robo Burton', description: 'You know what ol\' Jack Burton always says at a time like this?', statuses: statuses});
+ //      }else{
+ //      	return res.redirect('/');
+ //      }
 
-	});
+	// });
+
+  res.redirect('/secret');
 
 });
 
@@ -116,5 +119,91 @@ router.get('/all', function(req, res, next) {
 	});
 
 });
+
+// start auth login
+
+  /* GET signup page */
+  router.get('/signup', function(req, res, next){
+    res.render('signup');
+  });
+
+  /* POST signup */
+  router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/secret',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }));
+
+/* GET secret page. Note isLoggedIn middleware to verify if user is logged in */
+router.get('/secret', isLoggedIn, function(req, res, next) {
+  res.render('secret', { username : req.user.local.username,
+  signupDate: req.user.signupDate,
+  favorites: req.user.favorites });
+});
+
+  function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()){
+  return next();
+  }
+  res.redirect('/login');
+  }
+
+  /* GET login page. Any flash messages are automatically added. */
+  router.get('/login', function(req, res, next){
+  res.render('login');
+  });
+
+
+  /* POST login - this is called when clicking login button
+  Very similar to signup, except using local-login method. */
+  router.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/secret',
+    failureRedirect: '/login',
+    failureFlash: true
+  }));
+
+  /* GET Logout */
+  router.get('/logout', function(req, res, next) {
+    //passport middleware adds logout function to req object
+    req.logout(); 
+    res.redirect('/'); // redirect to home page
+  });
+
+
+  router.post('/saveSecrets', isLoggedIn, function(req, res, next){
+
+  // Check if the user has provided any new data
+  if (!req.body.color && !req.body.luckyNumber) {
+  req.flash('updateMsg', 'Please enter some new data');
+  return res.redirect('/secret')
+  }
+
+  //Collect any updated data from req.body, and add to req.user
+
+  if (req.body.color) {
+  req.user.favorites.color = req.body.color;
+  }
+  if (req.body.luckyNumber) {
+  req.user.favorites.luckyNumber = req.body.luckyNumber;
+  }
+
+  //And save the modified user, to save the new data.
+  req.user.save(function(err) {
+  if (err) {
+  if (err.name == 'ValidationError') {
+  req.flash('updateMsg', 'Error updating, check your data is valid'); //todo better message
+  }
+  else {
+  return next(err); // Some other DB error, send to 500 error handler
+  }
+  }
+  else {
+  req.flash('updateMsg', 'Updated data');
+  }
+
+  //Redirect back to secret page, which will fetch and show the updated data.
+  return res.redirect('/secret');
+  })
+  });
 
 module.exports = router;

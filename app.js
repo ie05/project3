@@ -4,10 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
+var flash = require('express-flash');
+var mongoose = require('mongoose');
+var MongoDBStore = require('connect-mongodb-session')(session);
+
 var hbs = require('express-handlebars');
 var index = require('./routes/index');
 var about = require('./routes/about');
+var users = require('./routes/users');
 var hbshelpsers = require('./hbshelpers/helpers');
+var auth = require('./routes/auth');
+
 
 var app = express();
 
@@ -30,6 +39,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+secret: 'replace me with long random string',
+resave: true,
+saveUninitialized: true,
+store: new MongoDBStore( { url: session_url })
+}));
+
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+var mongo_pw = process.env.MONGO_PW;
+var url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
+var session_url = 'mongodb://admin:' + mongo_pw + '@localhost:27017/secret_sessions?authSource=admin';
+mongoose.connect(url);
+
+app.use('/auth', auth);  // Order matters.
 app.use('/', index);
 app.use('/about', about);
 

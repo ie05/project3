@@ -106,3 +106,7 @@ input:focus{
   font-size: small;
   font-style: italic;
 }
+.errors{
+  color: red;
+  font-style: italic;
+}
