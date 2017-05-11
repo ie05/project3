@@ -35,10 +35,12 @@
 	        </form>
 		</div>
 	</div>
-	<p style="margin-left:5px;"><a href="/logout">Log Out</a></p>
 	{{/if}}
 
 </div>
+{{#if loggedin}}
+<p style="margin-left:5px;"><a href="/logout">Log Out</a></p>
+{{/if}}
 <div style="width:900px;">
 <p>{{text}}</p>
 <p>{{test_var}}</p>
