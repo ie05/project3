@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-secret: '5F9C37F5CDAE59EAE7AB88A48DEBB53F',
+secret: process.env.APP_SECRET,
 resave: true,
 saveUninitialized: true
 }));
