@@ -10,7 +10,8 @@
 	<div class="tweet-stream">
 		<a class="twitter-timeline" href="https://twitter.com/JackRoboBurton/likes">Tweets Liked by @JackRoboBurton</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 	</div>
-
+	
+	{{#if loggedin}}
 	<h5>Admin</h5>
 	<div id="accordion2">
 		<h5>Delete</h5>
@@ -34,6 +35,7 @@
 	        </form>
 		</div>
 	</div>
+	{{/if}}
 
 </div>
 <div style="width:900px;">

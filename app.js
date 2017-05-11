@@ -42,9 +42,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
 secret: 'replace me with long random string',
 resave: true,
-saveUninitialized: true,
-store: new MongoDBStore( { url: session_url })
+saveUninitialized: true
 }));
+
+// app.use(session({
+// secret: 'replace me with long random string',
+// resave: true,
+// saveUninitialized: true,
+// store: new MongoDBStore( { url: session_url })
+// }));
 
 require('./config/passport')(passport);
 app.use(passport.initialize());
@@ -53,7 +59,7 @@ app.use(flash());
 
 var mongo_pw = process.env.MONGO_PW;
 var url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
-var session_url = 'mongodb://admin:' + mongo_pw + '@localhost:27017/secret_sessions?authSource=admin';
+var session_url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
 mongoose.connect(url);
 
 app.use('/auth', auth);  // Order matters.
