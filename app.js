@@ -54,7 +54,7 @@ app.use(flash());
 // var mongo_pw = process.env.MONGO_PW;
 var url = process.env.MONGO_URL;
 // var url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
-var session_url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
+// var session_url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
 mongoose.connect(url);
 
 app.use('/auth', auth);  // Order matters.
