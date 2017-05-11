@@ -40,17 +40,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-secret: 'replace me with long random string',
+secret: '5F9C37F5CDAE59EAE7AB88A48DEBB53F',
 resave: true,
 saveUninitialized: true
 }));
-
-// app.use(session({
-// secret: 'replace me with long random string',
-// resave: true,
-// saveUninitialized: true,
-// store: new MongoDBStore( { url: session_url })
-// }));
 
 require('./config/passport')(passport);
 app.use(passport.initialize());

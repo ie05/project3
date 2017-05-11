@@ -1,3 +1,6 @@
+//////////////////////
+// START AJAX CALLS //
+//////////////////////
 function deleteStatus(id) {
   $.ajax({
         method: "DELETE",
@@ -41,6 +44,11 @@ function getAllStatuses(){
             console.log(error);
           });
 } // end getAllStatuses
+
+//////////////////////
+/// END AJAX CALLS ///
+//////////////////////
+
 
 function renderAllStatuses(obj){
   
