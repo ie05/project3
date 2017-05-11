@@ -1,18 +1,19 @@
-<h1>Top secret website</h1>
-
-<h2>Please log in here</h2>
+<h2>Jack's Admin:<br>
+<span style="font-size:small">Must be logged in to view</span></h2>
 <ul class="errors">
-	{{#each messages}}
-		<li>{{this}}</li>
-	{{/each}}
+  {{#each messages}}
+    <li>{{this}}</li>
+  {{/each}}
 </ul>
 
-<form action="/login" method="POST">
-Username: <input type="text" name="username" required>
+<form id="login-form" action="/login" method="POST">
+<label>Username:</label><br>
+<input type="text" name="username" "autocomplete="off" required>
 <br>
-Password: <input type="password" name="password" required>
+<label>Password:</label><br>
+<input type="password" name="password" "autocomplete="off" required>
 <br>
-<input type="submit" name="login" value="Log in">
+<button type="submit" name="login" value="Log in">Log in</button>
 </form>
 
-<p><a href="/logout">Log Out</a></p>
+<p style="margin-left:5px;"><a href="/logout">Log Out</a></p>
