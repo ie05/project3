@@ -119,17 +119,17 @@ router.get('/all', function(req, res, next) {
 
 // start auth login
 
-  // /* GET signup page */
-  // router.get('/signup', function(req, res, next){
-  //   res.render('signup');
-  // });
+  /* GET signup page */
+  router.get('/signup', function(req, res, next){
+    res.render('signup');
+  });
 
-  // /* POST signup */
-  // router.post('/signup', passport.authenticate('local-signup', {
-  //   successRedirect: '/admin',
-  //   failureRedirect: '/signup',
-  //   failureFlash: true
-  // }));
+  /* POST signup */
+  router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/admin',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }));
 
 /* GET secret page. Note isLoggedIn middleware to verify if user is logged in */
 router.get('/admin', isLoggedIn, function(req, res, next) {
