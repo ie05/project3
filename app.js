@@ -37,15 +37,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// var url = process.env.MONGO_URL;
-var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
-var session_url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
+var url = process.env.MONGO_URL;
 
 app.use(session({
-secret: '$2a$08$O95NFgaDwvPyjlo8PtoHk.sKg2fcZV1f1szC1AZh9w0Ozf8zdSoAy',
+secret: process.env.APP_SECRET,
 resave: true,
 saveUninitialized: true,
-store: new MongoDBStore( { url: session_url })
+store: new MongoDBStore( { url: url })
 }));
 
 require('./config/passport')(passport);
