@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-secret: process.env.APP_SECRET,
+secret: '$2a$08$O95NFgaDwvPyjlo8PtoHk.sKg2fcZV1f1szC1AZh9w0Ozf8zdSoAy',
 resave: true,
 saveUninitialized: true
 }));
@@ -52,14 +52,14 @@ app.use(passport.session());
 app.use(flash());
 
 // var mongo_pw = process.env.MONGO_PW;
-var url = process.env.MONGO_URL;
-// var url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
-// var session_url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
+// var url = process.env.MONGO_URL;
+var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
+var sessions_url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
+
 mongoose.connect(url);
 
 app.use('/auth', auth);  // Order matters.
 app.use('/', index);
-app.use('/about', about);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

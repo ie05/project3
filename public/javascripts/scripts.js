@@ -1,5 +1,5 @@
 //////////////////////
-// START AJAX CALLS //
+// START CALLS //
 //////////////////////
 function deleteStatus(id) {
   $.ajax({
