@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(session({
-secret: 'somestring',
+secret: '5F9C37F5CDAE59EAE7AB88A48DEBB53F',
 resave: true,
 saveUninitialized: true
 }));
@@ -51,7 +51,7 @@ app.use(passport.session());
 app.use(flash());
 var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
 
-var url = process.env.MONGO_URL;
+// var url = process.env.MONGO_URL;
 mongoose.connect(url);
 
 app.use('/', index);
