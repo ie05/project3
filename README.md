@@ -1,7 +1,7 @@
 # Ian Handshy
 ## Project: 3 - Twitter Bot Enriched Features: Jack Robo Burton
 
-### Features added: CRUD functions accessing Twitter's API, third party authentication
+### Features added: CRUD functions accessing Twitter's API, authentication
 
 
 ### What Bot Does
@@ -9,4 +9,8 @@ Jack Burton is possibly the greatest hero to ever walk the Earth at least in his
 
 As such, Jack in bot form takes headlines from The Onion on twitter and reposts them as advice, from the greatest action hero ever.
 
-See him in action at: https://jack-robo-burton.herokuapp.com/
+To use this app you'll need:
+* A twitter account https://twitter.com/signup
+* A new twitter app https://apps.twitter.com/
+
+See him in action at: https://boiling-shelf-52511.herokuapp.com/
