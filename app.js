@@ -51,7 +51,7 @@ app.use(passport.session());
 app.use(flash());
 
 var mongo_pw = process.env.MONGO_PW;
-var url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
+var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
 var session_url = 'mongodb://secretuser:' + mongo_pw + '@localhost:27017/secret?authSource=secret';
 mongoose.connect(url);
 
