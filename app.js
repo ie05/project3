@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var url = process.env.MONGO_URL;
+
 
 app.use(session({
 secret: process.env.APP_SECRET,
@@ -49,11 +49,12 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
+var url = process.env.MONGO_URL;
 mongoose.connect(url);
 
 app.use('/auth', auth);  // Order matters.
 app.use('/', index);
+app.use('/about', about);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
