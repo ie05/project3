@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(session({
-secret: process.env.APP_SECRET,
+secret: 'somestring',
 resave: true,
 saveUninitialized: true
 }));
@@ -49,11 +49,11 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-var url = process.env.MONGO_URL;
+var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
 mongoose.connect(url);
 
-app.use('/auth', auth);  // Order matters.
 app.use('/', index);
+app.use('/auth', auth);  // Order matters.
 app.use('/about', about);
 
 // catch 404 and forward to error handler

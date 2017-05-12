@@ -9,16 +9,16 @@ var isLoggedIn = require('../helpers/isLoggedIn');
 
 // stores API env vars
 var botCreds = {
- consumer_key: process.env.BOT_CONSUMER_KEY,
- consumer_secret: process.env.BOT_CONSUMER_SECRET,
- access_token: process.env.BOT_ACCESS_TOKEN,
- access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
+ consumer_key: '2ep9JxmzJZWRFsHBMEUjhcR0m',
+ consumer_secret: '8SiofFEtnWsA7LStjCbXV7xsJh2wXGCr3yqCXR0dTqY3ejTbpw',
+ access_token: '851970802543144961-IuygBxGwSjUwKokUyArh2yX4m8fEvCn',
+ access_token_secret: 'SKv5ZNUZEe5BB817TravMp3W3Rii3fhoh0oILNVfKWC6K',
  timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests. 
 };
 var T = new Twit(botCreds);
 
 // user id is 851970802543144961
-var user_id = process.env.USER_ID;
+var user_id = '851970802543144961';
 
 router.get('/', function(req, res, next) {
 
