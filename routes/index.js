@@ -9,15 +9,18 @@ var isLoggedIn = require('../helpers/isLoggedIn');
 
 // stores API env vars
 var botCreds = {
- consumer_key: '2ep9JxmzJZWRFsHBMEUjhcR0m',
- consumer_secret: '8SiofFEtnWsA7LStjCbXV7xsJh2wXGCr3yqCXR0dTqY3ejTbpw',
- access_token: '851970802543144961-IuygBxGwSjUwKokUyArh2yX4m8fEvCn',
- access_token_secret: 'SKv5ZNUZEe5BB817TravMp3W3Rii3fhoh0oILNVfKWC6K',
+ consumer_key: process.env.BOT_CONSUMER_KEY,
+ consumer_secret: process.env.BOT_CONSUMER_SECRET,
+ access_token: process.env.BOT_ACCESS_TOKEN,
+ access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
  timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests. 
 };
 var T = new Twit(botCreds);
+<<<<<<< HEAD
 
 // user id is 851970802543144961
+=======
+>>>>>>> restart
 var user_id = process.env.USER_ID;
 
 router.get('/', function(req, res, next) {
@@ -137,6 +140,7 @@ router.get('/all', function(req, res, next) {
 
 });
 
+<<<<<<< HEAD
 // GET Logout
 router.get('/logout', function(req, res, next) {
   // passport middleware adds logout function to req object
@@ -144,5 +148,9 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/'); // redirect to home page
 });
 
+=======
+
+
+>>>>>>> restart
 
 module.exports = router;
