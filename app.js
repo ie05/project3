@@ -42,8 +42,7 @@ var url = process.env.MONGO_URL;
 app.use(session({
 secret: process.env.APP_SECRET,
 resave: true,
-saveUninitialized: true,
-store: new MongoDBStore( { url: url })
+saveUninitialized: true
 }));
 
 require('./config/passport')(passport);
