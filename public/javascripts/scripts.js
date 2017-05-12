@@ -64,7 +64,6 @@ function renderAllStatuses(obj){
 }
 
 $(document).ready(function(){
-  
   // delete handler
   // triggers AJAX call 
   // to delete method
@@ -107,7 +106,6 @@ $(document).ready(function(){
           });
       }
      
-
   });
 
  }); // end document.ready

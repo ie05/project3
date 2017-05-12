@@ -10,14 +10,11 @@ var passport = require('passport');
 var flash = require('express-flash');
 var mongoose = require('mongoose');
 var MongoDBStore = require('connect-mongodb-session')(session);
-
 var hbs = require('express-handlebars');
 var index = require('./routes/index');
 var about = require('./routes/about');
-var users = require('./routes/users');
 var hbshelpsers = require('./hbshelpers/helpers');
 var auth = require('./routes/auth');
-
 
 var app = express();
 
@@ -40,10 +37,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// var url = process.env.MONGO_URL;
+var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
+var session_url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
+
 app.use(session({
 secret: '$2a$08$O95NFgaDwvPyjlo8PtoHk.sKg2fcZV1f1szC1AZh9w0Ozf8zdSoAy',
 resave: true,
-saveUninitialized: true
+saveUninitialized: true,
+store: new MongoDBStore( { url: session_url })
 }));
 
 require('./config/passport')(passport);
@@ -51,15 +53,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// var mongo_pw = process.env.MONGO_PW;
-// var url = process.env.MONGO_URL;
-var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
-var sessions_url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
-
 mongoose.connect(url);
 
-app.use('/auth', auth);  // Order matters.
 app.use('/', index);
+app.use('/auth', auth);  // Order matters.
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
