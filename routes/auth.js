@@ -63,7 +63,7 @@ router.get('/admin', isLoggedIn, function(req, res, next) {
 // GET login page.
 // Any flash messages are automatically added
 router.get('/login', function(req, res, next){
-res.render('login');
+  res.render('login');
 });
 
 
