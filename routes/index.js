@@ -16,11 +16,6 @@ var botCreds = {
  timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests. 
 };
 var T = new Twit(botCreds);
-<<<<<<< HEAD
-
-// user id is 851970802543144961
-=======
->>>>>>> restart
 var user_id = process.env.USER_ID;
 
 router.get('/', function(req, res, next) {
@@ -140,7 +135,6 @@ router.get('/all', function(req, res, next) {
 
 });
 
-<<<<<<< HEAD
 // GET Logout
 router.get('/logout', function(req, res, next) {
   // passport middleware adds logout function to req object
@@ -148,9 +142,5 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/'); // redirect to home page
 });
 
-=======
-
-
->>>>>>> restart
 
 module.exports = router;

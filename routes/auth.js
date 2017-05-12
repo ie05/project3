@@ -4,7 +4,6 @@ var isLoggedIn = require('../helpers/isLoggedIn');
 var router = express.Router();
 
 
-<<<<<<< HEAD
 // CLARA: I've commented out the following
 // code becuase this app is for multi users
 // however, if you have issues for getting your
@@ -36,7 +35,6 @@ var router = express.Router();
 // however a logged in bool = true is sent
 // to the template so the admin
 // section is activated
-=======
 // start auth login
 
   // /* GET signup page */
@@ -52,7 +50,7 @@ var router = express.Router();
   // }));
 
 /* GET secret page. Note isLoggedIn middleware to verify if user is logged in */
->>>>>>> restart
+
 router.get('/admin', isLoggedIn, function(req, res, next) {
     T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
         if (err) {
@@ -61,11 +59,9 @@ router.get('/admin', isLoggedIn, function(req, res, next) {
         
         if (data) {
          var statuses = [];
-<<<<<<< HEAD
            
-=======
+
            // console.log(data[0].text);
->>>>>>> restart
            for (var i = 0; i < data.length; i++) {
                  var text = data[i].text.replace('You know what ol\' Jack Burton always says? ','');
                  statuses.push(
@@ -73,10 +69,7 @@ router.get('/admin', isLoggedIn, function(req, res, next) {
                  );
              }
         
-<<<<<<< HEAD
-=======
-           // var json = JSON.stringify(statuses);
->>>>>>> restart
+
          res.render('index', { title: 'Jack Robo Burton', description: 'You know what ol\' Jack Burton always says at a time like this?', statuses: statuses, loggedin: true});
         }else{
           return res.redirect('/');
@@ -92,7 +85,6 @@ router.get('/admin', isLoggedIn, function(req, res, next) {
   res.redirect('/login');
   }
 
-<<<<<<< HEAD
 // GET login page.
 // Any flash messages are automatically added
 router.get('/login', function(req, res, next){
@@ -114,7 +106,6 @@ router.get('/logout', function(req, res, next) {
   req.logout(); 
   res.redirect('/'); // redirect to home page
 });
-=======
   /* GET login page. Any flash messages are automatically added. */
   router.get('/login', function(req, res, next){
   res.render('login');
@@ -135,6 +126,5 @@ router.get('/logout', function(req, res, next) {
     req.logout(); 
     res.redirect('/'); // redirect to home page
   });
->>>>>>> restart
 
 module.exports = router;

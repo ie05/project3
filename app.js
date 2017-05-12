@@ -49,12 +49,9 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-<<<<<<< HEAD
 var url = 'mongodb://secretuser:pw123@ds137271.mlab.com:37271/botsecret';
-=======
 
 var url = process.env.MONGO_URL;
->>>>>>> restart
 mongoose.connect(url);
 
 app.use('/', index);
