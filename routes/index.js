@@ -18,17 +18,17 @@ var botCreds = {
 var T = new Twit(botCreds);
 
 // user id is 851970802543144961
-var user_id = '851970802543144961';
+var user_id = process.env.USER_ID;
 
 router.get('/', function(req, res, next) {
 
-	T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
+  T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
       if (err) {
           return next(err);
       }
       
       if (data) {
-    	 var statuses = [];
+       var statuses = [];
          
          // loop over data object, and parse text
          for (var i = 0; i < data.length; i++) {
@@ -38,19 +38,19 @@ router.get('/', function(req, res, next) {
                // create an {} to hold tweet's text
                // and id, id is needed for deleting
                statuses.push(
-               	{id: data[i].id_str , text: text}
+                {id: data[i].id_str , text: text}
                );
            }
       
       // after parsing all tweets and storing in statuses arr
       // pass the arr to the index template to be rendered as
-      // li elements by hbs template	 
-	  	 res.render('index', { title: 'Jack Robo Burton', description: 'You know what ol\' Jack Burton always says at a time like this?', statuses: statuses});
+      // li elements by hbs template   
+       res.render('index', { title: 'Jack Robo Burton', description: 'You know what ol\' Jack Burton always says at a time like this?', statuses: statuses});
       }else{
-      	return res.redirect('/');
+        return res.redirect('/');
       }
 
-	});
+  });
 
 });
 
@@ -66,16 +66,16 @@ router.get('/about', function(req, res, next) {
 router.delete('/delete', function(req, res, next) {
   
   T.post('statuses/destroy/:id', { id: req.body.id }, function (err, data, response) {
-	   	if (err) {
-	        return next(err);
-	   	}
-	   	if (data) {
-	   		 res.status(202);
-			   res.end();
-	   	}else{
-	   		// TODO: Add flash error if delete is not successful
-	  		return res.redirect('/');
-	   	}
+      if (err) {
+          return next(err);
+      }
+      if (data) {
+         res.status(202);
+         res.end();
+      }else{
+        // TODO: Add flash error if delete is not successful
+        return res.redirect('/');
+      }
    }); // T.post
 
 }); // end post
@@ -85,55 +85,55 @@ router.delete('/delete', function(req, res, next) {
 // AJAX methods on the client, stored
 // in scripts.js
 router.post('/add', function(req, res, next){
- 	// parse tweet prior to using
+  // parse tweet prior to using
   // removes any mal chars
   var tweet = removeRegexChars(req.body.tweet);
  
- 	T.post('statuses/update', { status: tweet }, function(err, data, response) {
-  		if (err) {
-	        return next(err);
-	   	}
-  		
-  		if (data) {
-  			res.status(201);
-  			res.end();
-  		}
-  		else{
-  			// TODO: Send flash message if post fails
-			return res.redirect('/');
-  		}
+  T.post('statuses/update', { status: tweet }, function(err, data, response) {
+      if (err) {
+          return next(err);
+      }
+      
+      if (data) {
+        res.status(201);
+        res.end();
+      }
+      else{
+        // TODO: Send flash message if post fails
+      return res.redirect('/');
+      }
 
-	});
-	
+  });
+  
 });
 
 router.get('/all', function(req, res, next) {
   // get ALL tweets for acct. id 851970802543144961
   // this data is then used to initialize the view
   // delete section in the front-end admin
-	T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
+  T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
       if (err) {
           return next(err);
       }
       
       if (data) {
-    	 var statuses = [];
+       var statuses = [];
          for (var i = 0; i < data.length; i++) {
                var text = data[i].text.replace('You know what ol\' Jack Burton always says? ','');
                statuses.push(
-               	{id: data[i].id_str , text: text}
+                {id: data[i].id_str , text: text}
                );
            }
        // this route is accessed via AJAX
        // so JSON is returned here
-       // rather than a template	 
-	  	 res.status(201);
-  		 res.json(statuses);
+       // rather than a template   
+       res.status(201);
+       res.json(statuses);
       }else{
-      	return res.redirect('/');
+        return res.redirect('/');
       }
 
-	});
+  });
 
 });
 
