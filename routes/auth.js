@@ -98,7 +98,7 @@ res.render('login');
 // Very similar to signup, except using local-login method.
 router.post('/login', passport.authenticate('local-login', {
   successRedirect: '/auth/admin',
-  failureRedirect: '/login',
+  failureRedirect: '/auth/login',
   failureFlash: true
 }));
 
