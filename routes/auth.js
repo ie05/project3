@@ -21,12 +21,12 @@ var user_id = process.env.USER_ID; // id = 851970802543144961
 
 
 // CLARA: I've commented out the following
-// code becuase this app is for multi users
+// code becuase this app is not for multi users
 // however, if you have issues for getting your
-// user authenticated for this add, you can
+// user authenticated for this app, you can
 // uncomment this code and use the signup route
 // to create a user who will serve as admin.
-// I otherwise wouldn't include this  snippet
+// I otherwise wouldn't include this snippet
 // in my source code =)
 
   /* // GET signup page 
@@ -53,18 +53,6 @@ var user_id = process.env.USER_ID; // id = 851970802543144961
 // section is activated
 // start auth login
 
-  // /* GET signup page */
-  // router.get('/signup', function(req, res, next){
-  //   res.render('signup');
-  // });
-
-  // /* POST signup */
-  // router.post('/signup', passport.authenticate('local-signup', {
-  //   successRedirect: '/admin',
-  //   failureRedirect: '/signup',
-  //   failureFlash: true
-  // }));
-
 /* GET secret page. Note isLoggedIn middleware to verify if user is logged in */
 
 router.get('/admin', isLoggedIn, function(req, res, next) {
@@ -76,8 +64,6 @@ router.get('/admin', isLoggedIn, function(req, res, next) {
         if (data) {
          var statuses = [];
            
-
-           // console.log(data[0].text);
            for (var i = 0; i < data.length; i++) {
                  var text = data[i].text.replace('You know what ol\' Jack Burton always says? ','');
                  statuses.push(

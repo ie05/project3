@@ -1,5 +1,5 @@
 //////////////////////
-// START CALLS //
+// START AJAX CALLS //
 //////////////////////
 function deleteStatus(id) {
   $.ajax({
@@ -35,7 +35,6 @@ function getAllStatuses(){
             method: "GET",
             url: "/all"
           }).done(function (data) {
-            // console.log('data complete ' + JSON.stringify(data));
             console.log('All complete');
             renderAllStatuses(data);
            
@@ -51,8 +50,14 @@ function getAllStatuses(){
 
 
 function renderAllStatuses(obj){
-  
+  // remove all statuses from the view
+  // then re-write the statuses element
+  // with updated data from twitter
   $('.statuses').empty();
+
+  // use each function to append
+  // an li for every tweet returned
+  // from AJAX call
   $(obj).each(function(){
     var $li = $('<li>', {id: this.id});
     var $label = $('<label>', {'text': this.text});
@@ -77,7 +82,9 @@ $(document).ready(function(){
     }else{
       return false;
     }
-
+     // create a confirmation message
+     // letting the user know they successfully
+     // deleted a a tweet
      $('li[id="' + id + '"]').css({color: '#228B22'}).text('This post has been deleted...').delay(600).fadeOut('slow');
 
   });
@@ -89,6 +96,7 @@ $(document).ready(function(){
       if (e.preventDefault) {
         e.preventDefault();
       }else{e.returnValue = false}
+      // client side validation
       var tweet = $(this).siblings('input').val();
       if (tweet == '') {
         if ($('.val-error').length < 1) {
@@ -100,6 +108,9 @@ $(document).ready(function(){
           addStatus(tweet);
           $(this).siblings('input').val('Nice tweet!').animate({color: "#F5F5F5"},1000);
           
+          // remove input val from field
+          // after user submits, or leaves field
+          // without hitting submit
           $('input').on('focus',function(){
             $(this).val('').css({color: "#000000"});
         

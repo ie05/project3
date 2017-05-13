@@ -108,7 +108,7 @@ router.post('/add', function(req, res, next){
 
 router.get('/all', function(req, res, next) {
   // get ALL tweets for acct. id 851970802543144961
-  // this data is then used to initialize the view
+  // this data is then used to initialize the view's
   // delete section in the front-end admin
   T.get('statuses/user_timeline', { user_id: user_id}, function(err, data, response) {
       if (err) {
