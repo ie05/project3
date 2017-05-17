@@ -13,4 +13,4 @@ To use this app you'll need:
 * A twitter account https://twitter.com/signup
 * A new twitter app https://apps.twitter.com/
 
-See him in action at: https://boiling-shelf-52511.herokuapp.com/
+See him in action at: https://jack-robo-burton-auth.herokuapp.com/
