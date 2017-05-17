@@ -1,5 +1,5 @@
 # Ian Handshy
-## Project: 3 - Twitter Bot Enriched Features: Jack Robo Burton
+## Twitter Bot Enriched Features: Jack Robo Burton
 
 ### Features added: CRUD functions accessing Twitter's API, authentication
 
